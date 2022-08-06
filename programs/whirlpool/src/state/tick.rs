@@ -15,7 +15,7 @@ pub const TICK_ARRAY_SIZE_USIZE: usize = 88;
 
 #[zero_copy]
 #[repr(packed)]
-#[derive(Default, Debug, PartialEq)]
+#[derive(Default, Debug, PartialEq, borsh::BorshDeserialize)]
 pub struct Tick {
     // Total 137 bytes
     pub initialized: bool,     // 1
@@ -140,6 +140,7 @@ impl TickUpdate {
 
 #[account(zero_copy)]
 #[repr(packed)]
+#[derive(borsh::BorshDeserialize)]
 pub struct TickArray {
     pub start_tick_index: i32,
     pub ticks: [Tick; TICK_ARRAY_SIZE_USIZE],
